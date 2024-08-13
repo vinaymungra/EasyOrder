@@ -1,0 +1,37 @@
+User{
+	phoneNumber,
+	Order:[]
+}
+Order{
+	User:
+	Restaurant:
+	orderedItems:[{Item, Quantity}],
+	TableNo:
+}
+Item:{
+	category:
+	Price:
+	name:
+	status:
+}
+Restaurant{
+	name(compulsory):
+	address(compulsory):
+	Owner(compulsory),
+	tables(Optional),
+	EmergencyNumber(Optional),
+	Billing:(Pre(true)/post(false));
+	Items:[]
+}
+
+Owner{
+	firstname:
+	lastname:
+	email;
+	password:
+	confirmPassword:
+	api-Key:
+	Workers:[]
+}
+
+
