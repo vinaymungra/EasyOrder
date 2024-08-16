@@ -121,13 +121,15 @@ exports.create = async (req, res) => {
 			billing:true,
 			emergencyNumber
 		});
+
         const user=await Owner.findById(userId);
         user.bussiness=newBussiness._id
         user.save()
-		const menu = await Menu.create({
-			bussiness:newBussiness._id,
-			items:[]
-		})
+
+        const menu=await Menu.create({bussiness:newBussiness._id,category:[]})
+		newBussiness.menu=menu
+        newBussiness.save()
+
 		return res.status(200).json({
 			success: true,
 			data: newBussiness,

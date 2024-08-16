@@ -1,6 +1,6 @@
     import React, { useState,useEffect } from 'react';
     import { useDispatch, useSelector } from 'react-redux';
-    import { Link, useNavigate } from 'react-router-dom';
+    import { Link, NavLink, useNavigate } from 'react-router-dom';
     import { setSignupData, setToken } from '../../redux/slices/owner';
 
     const Navbar = () => {
@@ -13,8 +13,9 @@
         const logout=(e)=>{
             dispatch(setSignupData(null));
             dispatch(setToken(null));
-            localStorage.setItem("token",null)
+            localStorage.removeItem("token")
             navigate("/");
+            window.location.reload();
         }
         return (
             <div className='w-full border-2 border-red-700'>
@@ -56,21 +57,21 @@
                         </div>
                         
                             <div className='flex justify-center'>
-                            { (token=="null"||token==undefined)&&<Link
+                            { (token==null||token==undefined)&&<Link
                                     to="/login"
                                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                 >
                                     Login
                                 </Link>}
-                                { token=="null"&&<Link
+                                { (token==null||token==undefined)&&<NavLink
                                     to="/signup"
                                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                 >
                                     Signup
-                                </Link>}
+                                </NavLink>}
                             </div>
                         
-                        {(token!="null")&&
+                        {(token!=null||token!=undefined)&&
                             <div className='flex justify-center' onClick={(e)=>logout(e)}>
                                 <Link
                                     to="/"

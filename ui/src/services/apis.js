@@ -30,12 +30,20 @@ export const itemEndpoints = {
 
 // CUSTOMER ENDPOINTS
 export const customerEndpoints = {
-  COURSE_PAYMENT_API: BASE_URL + "/customer/capturePayment",
-  COURSE_VERIFY_API: BASE_URL + "/customer/verifyPayment",
+  PAYMENT_API: BASE_URL + "/customer/capturePayment",
+  VERIFY_API: BASE_URL + "/customer/verifyPayment",
   SEND_PAYMENT_SUCCESS_EMAIL_API: BASE_URL + "/customer/sendPaymentSuccessEmail",
+  GET_MENU: BASE_URL + "/customer/getMenu",
+  
 }
 
-
+// MENU ENDPOINTS
+export const menuEndpoints = {
+  MENU_CREATE_API: BASE_URL + "/menu/create",
+  MENU_EDIT_API: BASE_URL + "/menu/edit",
+  MENU_GET_API: BASE_URL + "/menu/get",
+}
+//CATEGORY ENDPOINTS
 export const categoryEndpoints = {
   CATEGORY_CREATE_API: BASE_URL + "/category/create",
   CATEGORY_EDIT_API: BASE_URL + "/category/edit",

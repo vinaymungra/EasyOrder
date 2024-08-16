@@ -4,6 +4,7 @@ import { createItem } from '../../../services/middlewares/item';
 import { addItemToMenu } from '../../../redux/slices/menu'; // Adjust the import path as needed
 import { FaEdit, FaTrashAlt, FaPlusCircle } from 'react-icons/fa'; // Icons
 import { addItem } from '../../../redux/slices/item';
+import { createMenu, editMenu } from '../../../services/middlewares/menu';
 const CreateItem = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const dispatch = useDispatch();
@@ -37,8 +38,11 @@ const CreateItem = () => {
     dispatch(addItem(result));
   };
 
-  const handleAddToMenu = (item) => {
-    dispatch(addItemToMenu({ item }));
+  const handleAddToMenu = async (item) => {
+    console.log(item);
+    const result=await dispatch(editMenu(item,token,true ));
+    console.log(result)
+    dispatch(addItemToMenu(result));
   };
 
   return (

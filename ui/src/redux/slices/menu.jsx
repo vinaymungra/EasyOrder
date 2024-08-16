@@ -1,8 +1,7 @@
-// menuSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    menuData: {}, // map-like structure: { category: [items] }
+    menuData: {}, // Created object because i want to utilize it like map: { category: [items] }
     loading: false,
 };
 
@@ -11,25 +10,32 @@ const menuSlice = createSlice({
     initialState: initialState,
     reducers: {
         setMenuData(state, action) {
-            const menuItems = action.payload;
-            const categorizedMenu = menuItems.reduce((acc, item) => {
-                // Ensure category key exists
-                if (!acc[item.category]) {
-                    acc[item.category] = [];
-                }
-                // Push item into the appropriate category
-                acc[item.category].push(item);
-                return acc;
-            }, {});
+            console.log(action.payload)
+
+            const payload  = action.payload; 
+            payload.map((item)=>{
+                state.menuData[item.name]=item.items;
+                console.log(item.name)
+            })  
             
-            state.menuData = categorizedMenu;
+            // const menuItems = action.payload;
+            // const categorizedMenu = menuItems.reduce((acc,item)=>{
+            //     if(!acc[item.category.name]){
+            //         acc[item.category.name]=[]
+            //     }
+            //     acc[item.category.name].push(item);
+            //     return acc
+            // },{})
+            
+            // state.menuData = categorizedMenu;
         },
         addItemToMenu(state, action) {
-            const { item } = action.payload;
-            if (!state.menuData[item.category]) {
-                state.menuData[item.category] = [];
-            }
-            state.menuData[item.category].push(item);
+            console.log(action.payload)
+
+            const payload  = action.payload; 
+            payload.map((item)=>{
+                state.menuData[item.name]=item.items;
+            })  
         },
         setLoading(state, action) {
             state.loading = action.payload;
@@ -39,3 +45,4 @@ const menuSlice = createSlice({
 
 export const { setMenuData, addItemToMenu, setLoading } = menuSlice.actions;
 export default menuSlice.reducer;
+

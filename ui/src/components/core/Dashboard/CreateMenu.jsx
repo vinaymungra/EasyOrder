@@ -2,41 +2,31 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMenuData } from '../../../redux/slices/menu'; // Adjust the import path as needed
 
+
+
 const CreateMenu = () => {
     const dispatch = useDispatch();
     const { menuData, loading } = useSelector((state) => state.menu);
-
-    useEffect(() => {
-        const fetchMenuData = async () => {
-            try {
-                // Fetch your menu data from the API or service
-                const response = await fetch('/api/menu');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-
-                // Dispatch data to Redux store
-                dispatch(setMenuData(data));
-            } catch (error) {
-                console.error('Failed to fetch menu data:', error);
-            }
-        };
-
-        fetchMenuData();
-    }, [dispatch]);
-
+    // console.log(menuData)
     return (
-        <div>
-            <h1>Create Menu</h1>
-            {loading ? <p>Loading...</p> : (
+        <div className="bg-beige min-h-screen bg-orange-300 p-8">
+            <h1 className="text-4xl font-bold text-brown-800 mb-8">Menu</h1>
+            {loading ? (
+                <p>Loading...</p>
+            ) : (
                 Object.keys(menuData).length > 0 ? (
-                    Object.keys(menuData).map((category) => (
-                        <div key={category}>
-                            <h2>{category}</h2>
-                            <ul>
+                    Object.keys(menuData).map(( category, index) => (
+                        <div key={index} className="mb-8">
+                            <ul className="space-y-4">
+                                <h2 className="text-2xl font-bold text-red-800 mb-4">{category}</h2>
                                 {menuData[category].map((item) => (
-                                    <li key={item.id}>{item.name}</li>
+                                    <div>
+                                    <li key={item._id} className="flex justify-between items-center p-4 bg-white rounded-lg shadow-md">
+                                        <img src={item.thumbnail}  className="w-40 h-40 object-cover  rounded-lg" alt="" />
+                                        <span className="text-lg font-medium text-gray-800">{item.name}</span>
+                                        <span className="text-lg font-semibold text-green-700">Rs.{item.price}</span>
+                                    </li>
+                                    </div>
                                 ))}
                             </ul>
                         </div>

@@ -24,7 +24,7 @@ export const createItem =  (data, token) => {
             })
             
             toast.success("Item Created Successfully")
-            console.log(response)
+            // console.log(response)
             responseData= response.data?.data;
         } catch (error) {
             console.log("Item create API ERROR............", error)

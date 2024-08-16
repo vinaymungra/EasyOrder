@@ -6,9 +6,9 @@ const menuSchema = new mongoose.Schema({
         ref: "Bussiness",
         required: true
     },
-    items: [{
+    category: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Item",
+        ref: "Category",
     }]
 });
 

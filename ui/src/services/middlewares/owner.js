@@ -27,7 +27,7 @@ export function sendOtp(email, navigate) {
 
             console.log("SENDOTP API RESPONSE............", response)
 
-            console.log(response.data.success)
+            // console.log(response.data.success)
 
             if (!response.data.success) {
                 throw new Error("hello" + response.data.message)
@@ -105,8 +105,8 @@ export function login(email, password, navigate) {
             toast.success("Login Successful")
             dispatch(setToken(response.data.token))
 
-            console.log(response.data);
-            localStorage.setItem("token", JSON.stringify(response.data.token))  
+            // console.log(response.data);
+            localStorage.setItem("token", response.data.token)  
             
             navigate("/dashboard")
         } catch (error) {

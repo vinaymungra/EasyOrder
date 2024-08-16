@@ -12,7 +12,7 @@ const {
     BUSSINESS_OF_USER   
 } = bussinessEndpoints
 
-export const createBussiness =  (closeModal, data, token) => {
+export const createBussiness =  (closeModal, data, token, navigate) => {
     return async (dispatch) => {
        
         const toastId = toast.loading("Loading...")
@@ -29,10 +29,9 @@ export const createBussiness =  (closeModal, data, token) => {
             toast.success("Bussiness Created Successfully")
             closeModal()
             data=await response.data.data;
-            console.log(data);
-            localStorage.setItem("bussiness",data)
-            dispatch(setBussinessData(data));
-
+            // console.log(data);
+            await dispatch(setBussinessData(data));
+            navigate('/dashboard')
         } catch (error) {
             console.log("Bussiness API ERROR............", error)
             toast.error("Failed to create bussiness")
@@ -114,8 +113,8 @@ export const handleBussinessData=(token) =>{
         result = await response.data.data
         
         } catch (error) {
-        console.log("API ERROR in getting bussiness of user............", error)
-        toast.error("Could Not Get User's Bussiness")
+            console.log("API ERROR in getting bussiness of user............", error)
+            
         }
         dispatch(setLoading(false))
         toast.dismiss(toastId)

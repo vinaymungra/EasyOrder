@@ -35,7 +35,7 @@ const CreateBussiness = () => {
     }));
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
     data.append("file",selectedFile);
@@ -44,19 +44,10 @@ const CreateBussiness = () => {
     data.append("tables",formData.tables);
     data.append("emergencyNumber",formData.emergencyNumber);
     data.append("billing",formData.billing);
+    console.log(token)
+    await dispatch(createBussiness(closeModal,data,token,navigate))
     
-    dispatch(createBussiness(closeModal,data,token))
-    // console.log(bussinessData);
-
-    // setFormData({
-    //   name: "",
-    //   address: "",
-    //   tables: "",
-    //   emergencyNumber: "",
-    //   billing: "",
-    //   file:null
-    // });
-    navigate('/dashboard')
+    
   };
 
   return (

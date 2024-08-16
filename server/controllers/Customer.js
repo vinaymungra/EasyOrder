@@ -1,3 +1,5 @@
+const { model } = require("mongoose");
+const Bussiness = require("../models/Bussiness");
 const Customer = require("../models/Customer")
 
 exports.create=async(req,res)=>{
@@ -29,3 +31,41 @@ exports.create=async(req,res)=>{
         });
     }
 }
+
+exports.getMenu= async(req,res)=>{
+    try{
+        const { bussinessId}=req.body
+        
+        if(!bussinessId)
+        {
+            return res.status(400).json({
+                success: false,
+                message: "Error",
+            });
+        }
+        const data = await Bussiness.findById(bussinessId)
+        .populate({
+            path:'category',
+            populate:{
+                path:'items',
+                model:'Item'
+            }
+        })
+        return res.status(200).json({ 
+			success:true,
+            message:"",
+            data
+		});
+    }
+    catch(error)
+    {
+        console.error(error);
+        return res.status(500).json({
+            success: false,
+            message: "Failed to detect QR",
+            error: error.message,
+        });
+    }
+}
+
+

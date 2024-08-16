@@ -2,6 +2,8 @@ const Menu = require("../models/Menu");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 const Item = require("../models/Item");
 const Bussiness = require("../models/Bussiness");
+const Category = require("../models/Category");
+
 const { default: mongoose } = require("mongoose");
 
 exports.add = async (req, res) => {
@@ -53,6 +55,9 @@ exports.add = async (req, res) => {
 			thumbnail: thumbnailImage.secure_url,
 			bussiness: business._id,
 		});
+
+		await Category.findByIdAndUpdate(categoryId, { $push: { items: newItem._id } });
+
 
 		return res.status(200).json({
 			success: true,

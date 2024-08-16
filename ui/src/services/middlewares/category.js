@@ -23,7 +23,7 @@ export const createCategory = (token,name) => {
             })
 
             toast.success("Category Created Successfully")
-            console.log(response)
+            // console.log(response)
             responseData = await response.data?.data;
         } catch (error) {
             console.log("Category create API ERROR............", error)
@@ -51,7 +51,7 @@ export const getAllCatogoryData = (token) => {
                 }
             )
             
-            console.log(response.data.data);
+            // console.log(response.data.data);
             result = await response.data.data
 
         } catch (error) {
