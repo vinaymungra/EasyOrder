@@ -32,7 +32,7 @@ app.use(
 		credentials:true,
 	})
 )
-
+console.log("Frontend",process.env.FRONTEND)
 database.connect();
 cloudinaryConnect();
 
