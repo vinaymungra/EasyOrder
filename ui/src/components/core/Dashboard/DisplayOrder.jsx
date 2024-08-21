@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 const DisplayOrder = () => {
     const { order } = useSelector((state) => state.owner);
 
-    useEffect(() => {
-        console.log(order);
-    }, [order]);
+    // useEffect(() => {
+    //     console.log(order);
+    // }, [order]);
 
     if (!order || order.length === 0) {
         return <div className="text-center text-gray-500">No orders to display</div>;

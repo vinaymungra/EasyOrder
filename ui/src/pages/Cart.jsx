@@ -9,11 +9,7 @@ const Cart = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
-    const { cartData,menuData } = useSelector((state) => state.customer);
-
-
-    // Log the Razorpay key to verify it's being read correctly
-    // console.log("Razorpay Key:", process.env.REACT_APP_RAZORPAY_KEY);
+    const { cartData, menuData } = useSelector((state) => state.customer);
 
     const handleIncrement = (item) => {
         dispatch(addToCart({ item }));
@@ -33,23 +29,21 @@ const Cart = () => {
     const calculateTotalAmount = () => {
         let total = 0;
         Object.keys(cartData).forEach(item => {
-            total += cartData[item].price 
+            total += cartData[item].price * cartData[item].quantity; 
         });
         return total;
     };
 
     const handlePayButton = async () => {
-        const amount = calculateTotalAmount()
+        const amount = calculateTotalAmount();
         const options = {
             key: process.env.REACT_APP_RAZORPAY_KEY, 
-            amount: amount*100, // Amount in paisa, make sure to multiply by 100 if amount is in rupees
+            amount: amount * 100, // Amount in paisa
             currency: "INR",
             name: "Easy Order",
             description: "Order food without getting into queue",
             handler: function (response) {
-                
-                dispatch(paymentSuccessfull(navigate,location,cartData,menuData));
-                // alert("Payment Successful");
+                dispatch(paymentSuccessfull(navigate, location, cartData, menuData));
             },
             prefill: {
                 name: "Customer Name",
@@ -60,7 +54,7 @@ const Cart = () => {
                 address: "Razorpay Corporate Office"
             },
             theme: {
-                color: "#3399cc"
+                color: "#ff6600"
             }
         };
     
@@ -69,23 +63,27 @@ const Cart = () => {
     };
 
     return (
-        <div className="bg-beige min-h-screen p-8">
-            <h1 className="text-4xl font-bold text-brown-800 mb-8">Your Cart</h1>
+        <div className="bg-black min-h-screen p-8">
+            <h1 className="text-4xl font-bold text-yellow-500 mb-8">Your Cart</h1>
             {Object.keys(cartData).length > 0 ? (
                 <ul className="space-y-4">
                     {Object.keys(cartData).map((itemName) => (
-                        <li key={itemName} className="flex justify-between items-center p-4 bg-white rounded-lg shadow-md">
-                            <span className="text-lg font-medium text-gray-800">{itemName}</span>
+                        <li key={itemName} className="flex items-center p-4 bg-gray-800 rounded-lg shadow-lg">
+                            <img src={cartData[itemName].thumbnail} alt={itemName} className="w-16 h-16 object-cover rounded-lg mr-4" />
+                            <div className="flex-1">
+                                <h2 className="text-lg font-medium text-white">{itemName}</h2>
+                                <p className="text-yellow-400 text-lg font-semibold">Rs. {cartData[itemName].price}</p>
+                            </div>
                             <div className="flex items-center space-x-4">
                                 <button 
-                                    className="text-lg text-green-700"
+                                    className="text-lg text-green-400 hover:text-green-500 transition"
                                     onClick={() => handleIncrement({ name: itemName })}
                                 >
                                     <FaPlus />
                                 </button>
-                                <span className="text-lg font-medium text-gray-800">{cartData[itemName]}</span>
+                                <span className="text-lg font-medium text-white">{cartData[itemName].quantity}</span>
                                 <button 
-                                    className="text-lg text-red-700"
+                                    className="text-lg text-red-500 hover:text-red-600 transition"
                                     onClick={() => handleDecrement({ name: itemName })}
                                 >
                                     <FaMinus />
@@ -95,17 +93,17 @@ const Cart = () => {
                     ))}
                 </ul>
             ) : (
-                <p>Your cart is empty.</p>
+                <p className="text-white">Your cart is empty.</p>
             )}
             <div className="mt-8 flex justify-between">
                 <button 
-                    className="bg-gray-500 text-white py-2 px-4 rounded-lg"
+                    className="bg-gray-700 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition"
                     onClick={handleBackToMenu}
                 >
                     Back to Menu
                 </button>
                 <button 
-                    className="bg-green-700 text-white py-2 px-4 rounded-lg"
+                    className="bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 transition"
                     onClick={handlePayButton}
                 >
                     Pay

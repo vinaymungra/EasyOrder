@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    cartData: {}, // Changed to an object for better tracking of items and their quantities
+    cartData: {}, // Stores items with quantity and price
     menuData: {}, 
     loading: false,
-    customerToken:localStorage.getItem("customerToken")||null
+    customerToken: localStorage.getItem("customerToken") || null
 };
 
 const customerSlice = createSlice({
@@ -12,29 +12,39 @@ const customerSlice = createSlice({
     initialState: initialState,
     reducers: {
         setData(state, action) {
-            console.log(action.payload);
-            const payload  = action.payload; 
+            // console.log(action.payload);
+            const payload = action.payload; 
             payload.forEach((item) => {
                 state.menuData[item.name] = item.items;
-                console.log(item.name);
+               
             });  
         },
         addToCart(state, action) {
             const itemName = action.payload.item.name;
-            
+            const itemPrice = action.payload.item.price;
+            const itemThubnail =action.payload.item.thumbnail
+// console.log(itemThubnail)
             if (state.cartData[itemName]) {
-                state.cartData[itemName] ++;
+                // Increment the quantity if the item is already in the cart
+                state.cartData[itemName].quantity++;
             } else {
-                state.cartData[itemName] = 1;
+                // Initialize the quantity and price if the item is not in the cart
+                state.cartData[itemName] = {
+                    quantity: 1,
+                    price: itemPrice,
+                    thumbnail:itemThubnail
+                };
             }
         },
         removeFromCart(state, action) {
             const itemName = action.payload.item.name;
 
             if (state.cartData[itemName]) {
-                if (state.cartData[itemName] > 1) {
-                    state.cartData[itemName] --;
+                if (state.cartData[itemName].quantity > 1) {
+                    // Decrease the quantity if more than one exists
+                    state.cartData[itemName].quantity--;
                 } else {
+                    // Remove the item from the cart if quantity is 1
                     delete state.cartData[itemName];
                 }
             }

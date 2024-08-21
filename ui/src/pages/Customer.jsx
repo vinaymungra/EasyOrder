@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMenu } from '../services/middlewares/customer';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
+import MenuItem from '../components/core/Customer/MenuItem'; // Ensure you import MenuItem
 
 const Customer = () => {
     const dispatch = useDispatch();
@@ -12,7 +13,6 @@ const Customer = () => {
     const { menuData, cartData, loading } = useSelector((state) => state.customer);
 
     useEffect(() => {
-        console.log("Customer route")
         const arr = location.pathname.split("/");
         (
             async () => {
@@ -25,11 +25,11 @@ const Customer = () => {
         )();
     }, [location.pathname, dispatch]);
 
-    const handleAddToCart = (event, item) => {
+    const handleAddToCart = (item) => {
         dispatch(addToCart({ item }));
     };
 
-    const handleRemovefromCart = (event, item) => {
+    const handleRemovefromCart = (item) => {
         dispatch(removeFromCart({ item }));
     };
 
@@ -41,42 +41,40 @@ const Customer = () => {
     };
 
     return (
-        <div className="bg-beige min-h-screen bg-orange-300 p-8">
+        <div className="bg-black min-h-screen p-8">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-4xl font-bold text-brown-800">Menu</h1>
+                <h1 className="text-4xl font-bold text-white">Menu</h1>
                 <button 
-                    className="text-3xl text-brown-800"
+                    className="text-3xl text-white"
                     onClick={handleNavigateToCart}
                 >
                     <FaShoppingCart />
                 </button>
             </div>
             {loading ? (
-                <p>Loading...</p>
+                <p className="text-white">Loading...</p>
             ) : (
                 Object.keys(menuData).length > 0 ? (
                     Object.keys(menuData).map((category, index) => (
                         <div key={index} className="mb-8">
-                            <ul className="space-y-4">
-                                <h2 className="text-2xl font-bold text-red-800 mb-4">{category}</h2>
+                            <h2 className="text-2xl font-bold text-yellow-500 mb-4">{category}</h2>
+                            <div className="flex flex-col gap-6">
                                 {menuData[category].map((item) => (
-                                    <li key={item._id} className="flex justify-between items-center p-4 bg-white rounded-lg shadow-md">
-                                        <img src={item.thumbnail} className="w-40 h-40 object-cover rounded-lg" alt="" />
-                                        <span className="text-lg font-medium text-gray-800">{item.name}</span>
-                                        <span className="text-lg font-semibold text-green-700">Rs.{item.price}</span>
-                                        <div>
-                                            {cartData[item.name] 
-                                                ? <button onClick={(e) => handleRemovefromCart(e, item)}>Remove from Cart</button>
-                                                : <button onClick={(e) => handleAddToCart(e, item)}>Add to Cart</button>
-                                            }
-                                        </div>
-                                    </li>
+                                    <MenuItem 
+                                        key={item._id} 
+                                        name={item.name} 
+                                        price={item.price} 
+                                        thumbnail={item.thumbnail} 
+                                        cartData={cartData} 
+                                        handleAddToCart={() => handleAddToCart(item)} 
+                                        handleRemovefromCart={() => handleRemovefromCart(item)} 
+                                    />
                                 ))}
-                            </ul>
+                            </div>
                         </div>
                     ))
                 ) : (
-                    <p>No menu items found.</p>
+                    <p className="text-white">No menu items found.</p>
                 )
             )}
         </div>

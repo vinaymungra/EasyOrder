@@ -20,7 +20,7 @@ export const getMenu=(data) =>{
             
             const response = await apiConnector("GET", GET_MENU+`/${data.bussinessId}` );
             
-            console.log(response);
+            // console.log(response);
             result = await response.data.data.category        
         } catch (error) {
             console.log("API ERROR in getting menu for customer............", error)
