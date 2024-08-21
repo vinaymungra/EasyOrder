@@ -4,7 +4,7 @@ const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
 const database = require("./config/database");
-const cors = require("cors");
+// const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const ownerRoutes = require("./routes/Owner");
@@ -27,11 +27,11 @@ app.use(
     })
 );
 app.use(
-	cors({
-		origin:process.env.FRONTEND,
-		credentials:true,
-	})
-)
+    cors({
+      origin: "*", // Allow all origins
+    })
+  );
+  
 console.log("Frontend",process.env.FRONTEND)
 database.connect();
 cloudinaryConnect();
