@@ -12,6 +12,7 @@ require("dotenv").config();
 
 exports.signup = async(req,res)=>{
     try{
+		console.log("hhhh");
         const {
             firstName,
             lastName,
