@@ -29,7 +29,7 @@ exports.getBussinessCodes = async (req, res) => {
 
         var codes=[]
         for (let i = 1; i <= tables; i++) {
-            const url = `http://localhost:4000/${bussiness._id}/${i}`;
+            const url = `${process.env.FRONTEND}${bussiness._id}/${i}`;
 
             const qrCodePromise = new Promise((resolve, reject) => {
                 QRcode.toDataURL(url, async (err, qrCodeUrl) => {

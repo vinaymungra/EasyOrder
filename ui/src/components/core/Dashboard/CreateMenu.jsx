@@ -1,12 +1,30 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMenuData } from '../../../redux/slices/menu'; // Adjust the import path as needed
+import { getMenu } from '../../../services/middlewares/menu';
 
 
 
 const CreateMenu = () => {
     const dispatch = useDispatch();
     const { menuData, loading } = useSelector((state) => state.menu);
+    const {token} = useSelector(state=>state.owner)
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+              var result = await dispatch(getMenu(token));
+              dispatch(setMenuData(result));
+            
+             
+            
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        };
+    
+        fetchData();
+      }, []);
+    
     // console.log(menuData)
     return (
         <div className="bg-beige min-h-screen bg-orange-300 p-8">

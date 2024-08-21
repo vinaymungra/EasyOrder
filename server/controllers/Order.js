@@ -64,29 +64,37 @@ exports.create = async (req, res) => {
     }
 };
 
-
 exports.get = async (req, res) => {
     try {
         const bussiness = req.user.bussiness;
-        if(!bussiness)
-        {
+        if (!bussiness) {
             return res.status(500).json({
                 success: false,
                 message: "Failed to fetch orders",
-                error: error.message,
+                error: "No business associated with the user",
             });
         }
-        const orders= await Order.findOne({bussiness})
-        return res.status(200).json({
-            success:true,
-            data:orders
-        })
+
         
+        const orders = await Order.find({ bussiness }).populate('orderedItems.item');
+
+        if (!orders) {
+            return res.status(404).json({
+                success: false,
+                message: "No orders found for the business",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            data: orders
+        });
+
     } catch (error) {
         console.error(error);
         return res.status(500).json({
             success: false,
-            message: "Failed to create order",
+            message: "Failed to fetch orders",
             error: error.message,
         });
     }

@@ -12,6 +12,7 @@ const Customer = () => {
     const { menuData, cartData, loading } = useSelector((state) => state.customer);
 
     useEffect(() => {
+        console.log("Customer route")
         const arr = location.pathname.split("/");
         (
             async () => {

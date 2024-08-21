@@ -61,6 +61,7 @@ exports.editMenu = async (req, res) => {
 };
 exports.get = async (req, res) => {
 	try {
+		// console.log(req.user)
 		const bussinessId = req.user?.bussiness._id;
 		if (!bussinessId) {
 			return res.status(500).json({

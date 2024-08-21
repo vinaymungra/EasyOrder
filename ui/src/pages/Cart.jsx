@@ -33,7 +33,7 @@ const Cart = () => {
     const calculateTotalAmount = () => {
         let total = 0;
         Object.keys(cartData).forEach(item => {
-            total += cartData[item] * 100; // Assuming each item costs 100 for this example
+            total += cartData[item].price 
         });
         return total;
     };
@@ -41,7 +41,7 @@ const Cart = () => {
     const handlePayButton = async () => {
         const amount = calculateTotalAmount()
         const options = {
-            key: process.env.REACT_APP_RAZORPAY_KEY, // Access the Razorpay key correctly
+            key: process.env.REACT_APP_RAZORPAY_KEY, 
             amount: amount*100, // Amount in paisa, make sure to multiply by 100 if amount is in rupees
             currency: "INR",
             name: "Easy Order",
@@ -64,8 +64,8 @@ const Cart = () => {
             }
         };
     
-        // const rzp = new window.Razorpay(options);
-        // rzp.open();
+        const rzp = new window.Razorpay(options);
+        rzp.open();
     };
 
     return (

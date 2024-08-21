@@ -6,7 +6,7 @@ const initialState = {
     signupData: null,
     loading: false,
     token: localStorage.getItem('token') || null,
-    order:{}
+    order:[]
 };
 
 const ownerSlice = createSlice({
@@ -23,6 +23,7 @@ const ownerSlice = createSlice({
             state.token = action.payload;
         },
         setOrderData(state,action){
+            // console.log(action.payload)
             state.order=action.payload
         }
     },

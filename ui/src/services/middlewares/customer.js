@@ -15,12 +15,12 @@ export const getMenu=(data) =>{
         let result={}
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
-    
+        console.log(GET_MENU+`/${data.bussinessId}`)
         try {
             
             const response = await apiConnector("GET", GET_MENU+`/${data.bussinessId}` );
             
-            console.log(response.data.data.category);
+            console.log(response);
             result = await response.data.data.category        
         } catch (error) {
             console.log("API ERROR in getting menu for customer............", error)

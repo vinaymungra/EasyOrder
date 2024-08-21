@@ -13,30 +13,38 @@ import CreateBussiness from './components/core/Dashboard/CreateBussiness';
 import CreateMenu from './components/core/Dashboard/CreateMenu';
 import CreateCategory from './components/core/Dashboard/CreateCategory';
 import CreateItem from './components/core/Dashboard/CreateItem';
-import DisplayOrders from './components/core/Dashboard/DisplayOrders';
+
 import Setting from './components/common/Setting';
 import QrCodes from './components/core/Dashboard/QrCodes';
 import Customer from './pages/Customer';
 import Cart from './pages/Cart';
+import DisplayOrder from './components/core/Dashboard/DisplayOrder';
 
 function App() {
     const { token } = useSelector((state) => state.owner);
     const dispatch = useDispatch();
     const location = useLocation();
-    
-    const isValidObjectId =false;
-    const isValidTableNumber=false;
+
+    const [isValidObjectId, setIsValidObjectId] = useState(false);
+    const [isValidTableNumber, setIsValidTableNumber] = useState(false);
+
     useEffect(() => {
         const arr = location.pathname.split("/");
-        const isValidObjectId = /^[0-9a-fA-F]{24}$/.test(arr[1]);
-        const isValidTableNumber = !isNaN(arr[2]);
+        const objectId = arr[1];
+        const tableNumber = arr[2];
 
-       
+        const isValidObjId = /^[0-9a-fA-F]{24}$/.test(objectId);
+        const isValidTableNum = !isNaN(tableNumber);
+
+        setIsValidObjectId(isValidObjId);
+        setIsValidTableNumber(isValidTableNum);
+
+        console.log(isValidObjId + " " + isValidTableNum);
     }, [location.pathname]);
 
     return (
         <>
-            {!isValidObjectId && !isValidTableNumber && (
+            {(!isValidObjectId || !isValidTableNumber) && (
                 <>
                     <Navbar />
                     <Routes>
@@ -47,7 +55,7 @@ function App() {
                                 <Route path="/dashboard/create-category" element={<CreateCategory />} />
                                 <Route path="/dashboard/create-item" element={<CreateItem />} />
                                 <Route path="/dashboard/create-bussiness" element={<CreateBussiness />} />
-                                <Route path="/dashboard/orders" element={<DisplayOrders />} />
+                                <Route path="/dashboard/orders" element={<DisplayOrder />} />
                                 <Route path="/dashboard/qrcodes" element={<QrCodes />} />
                             </Route>
                         ) : (
@@ -61,10 +69,10 @@ function App() {
                     </Routes>
                 </>
             )}
-            {isValidObjectId && isValidTableNumber && (
+            {(isValidObjectId && isValidTableNumber) && (
                 <Routes> 
-                    <Route path="/:businessId/:table" element={<Customer />} />
-                    <Route path="/:businessId/:table/cart" element={<Cart />} />
+                    <Route path="/:bussinessId/:table" element={<Customer />} />
+                    <Route path="/:bussinessId/:table/cart" element={<Cart />} />
                 </Routes>
             )}
         </>

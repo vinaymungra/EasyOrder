@@ -24,7 +24,7 @@ exports.createCategory = async (req, res) => {
 			{ new: true }
 		);
 
-		console.log(menuId)
+		// console.log(menuId)
 		await Menu.findByIdAndUpdate(
 			menuId,
 			{ $push: { category: newcategory._id } },

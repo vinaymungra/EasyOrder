@@ -17,7 +17,7 @@ exports.sendotp = async (req, res) => {
 		
 		const otpPayload = { number, otp };
 		const otpBody = await OTP.create(otpPayload);
-		console.log("OTP Body", otpBody);
+		// console.log("OTP Body", otpBody);
 		res.status(200).json({
 			success: true,
 			message: `OTP Sent Successfully`,
@@ -91,8 +91,8 @@ exports.getMenu= async(req,res)=>{
                 message: "Error",
             });
         }
-        bussinessId =new  mongoose.Types.ObjectId(`${bussinessId}`);
-        const data = await Bussiness.findById(bussinessId).populate({
+       const bussiness =new  mongoose.Types.ObjectId(`${bussinessId}`);
+        const data = await Bussiness.findById(bussiness).populate({
             path:'category',
             populate:{
                 path:'items',

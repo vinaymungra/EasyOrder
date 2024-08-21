@@ -13,11 +13,11 @@ const customerSlice = createSlice({
     reducers: {
         setData(state, action) {
             console.log(action.payload);
-            // const payload  = action.payload; 
-            // payload.forEach((item) => {
-            //     state.menuData[item.name] = item.items;
-            //     console.log(item.name);
-            // });  
+            const payload  = action.payload; 
+            payload.forEach((item) => {
+                state.menuData[item.name] = item.items;
+                console.log(item.name);
+            });  
         },
         addToCart(state, action) {
             const itemName = action.payload.item.name;

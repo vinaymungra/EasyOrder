@@ -15,8 +15,8 @@ exports.bussiness = async (req, res, next) => {
                 ...user,
                 bussiness
             }   
-            console.log("Bussiness ")
-            console.log(req.user)
+            // console.log("Bussiness ")
+            // console.log(req.user)
            
         } catch (error) {
             return res.status(401).json({ success: false, message: "Bussiness not found" });

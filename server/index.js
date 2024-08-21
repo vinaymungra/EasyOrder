@@ -28,9 +28,9 @@ app.use(
 );
 app.use(
     cors({
-      origin: "*", // Allow all origins
+      origin: "*", // Allow all origins then only vercel error will be resolved
     })
-  );
+);
   
 console.log("Frontend",process.env.FRONTEND)
 database.connect();
