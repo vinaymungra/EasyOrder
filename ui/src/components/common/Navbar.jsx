@@ -17,7 +17,7 @@
             navigate("/");
             window.location.reload();
         }
-        console.log("env url is ", process.env.BACKEND_BASE_URL)
+        console.log("env url is ", process.env.REACT_APP_BACKEND_BASE_URL)
         return (
             <div className='w-full border-2 border-red-700'>
                 <div className="mx-auto  px-2 bg-gray-600  text-white sm:px-6 lg:px-16 ">
