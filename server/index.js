@@ -28,7 +28,7 @@ app.use(
 );
 app.use(
 	cors({
-		origin:"http://localhost:3000",
+		origin:"https://easy-order-seven.vercel.app/",
 		credentials:true,
 	})
 )
