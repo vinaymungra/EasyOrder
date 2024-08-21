@@ -25,6 +25,7 @@ export const itemEndpoints = {
   ITEM_EDIT_THUMBNAIL_API: BASE_URL + "/item/editThumbnail",
   ITEM_GET_ALL_ITEMS_API:  BASE_URL + "/item/getAllItems",
   ITEM_DELETE_API:         BASE_URL + "/item/delete",
+
 }
 
 
@@ -34,6 +35,14 @@ export const customerEndpoints = {
   VERIFY_API: BASE_URL + "/customer/verifyPayment",
   SEND_PAYMENT_SUCCESS_EMAIL_API: BASE_URL + "/customer/sendPaymentSuccessEmail",
   GET_MENU: BASE_URL + "/customer/getMenu",
+  ADD_ITEM_TO_CART: BASE_URL + "/customer/addItemToCart",
+  // CHECK_BUSSINESS_EXISTS: BASE_URL + "/customer/checkBussiness",
+
+}
+
+// ORDER ENDPOINTS
+export const orderEndpoints = {
+  PLACE_ORDER : BASE_URL + "/order/placeOrder"
   
 }
 

@@ -5,7 +5,8 @@ import Cookies from "js-cookie";
 const initialState = {
     signupData: null,
     loading: false,
-    token: localStorage.getItem('token') || null 
+    token: localStorage.getItem('token') || null,
+    
 };
 
 const ownerSlice = createSlice({

@@ -114,7 +114,7 @@ export const handleBussinessData=(token) =>{
         
         } catch (error) {
             console.log("API ERROR in getting bussiness of user............", error)
-            
+                
         }
         dispatch(setLoading(false))
         toast.dismiss(toastId)

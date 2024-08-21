@@ -3,10 +3,13 @@ const router = express.Router()
 
 const {
     create,
-    get
+   
 } = require("../controllers/Order")
 
-// const { auth } = require("../middlewares/auth")
+const { owner } = require("../middlewares/owner")
+const { bussiness } = require("../middlewares/bussiness")
 
-router.post("/create", create)
+
+router.post("/placeOrder", create)
+
 module.exports = router

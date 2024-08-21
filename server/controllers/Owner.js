@@ -20,7 +20,7 @@ exports.signup = async(req,res)=>{
             confirmPassword,
 			otp
         } = req.body
-		console.log(req.body)
+		// console.log(req.body)
         if (
 			!firstName ||
 			!lastName ||
@@ -52,7 +52,7 @@ exports.signup = async(req,res)=>{
 		}
         
         const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1); 
-		console.log(response);
+		// console.log(response);
 		if (response.length === 0) 
         {       
 			return res.status(400).json({
@@ -104,7 +104,7 @@ exports.login = async (req, res) => {
 		}
 		
 		const user = await Owner.findOne({ email })
-		console.log(user);
+		
 
 		if (!user)
 		{
@@ -155,7 +155,7 @@ exports.login = async (req, res) => {
 exports.sendotp = async (req, res) => {
 	try {
 		const { email } = req.body;
-		console.log("coming");
+	
 		const checkUserPresent = await Owner.findOne({ email });
 		
 		if (checkUserPresent) {

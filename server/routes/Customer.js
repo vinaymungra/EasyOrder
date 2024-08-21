@@ -3,12 +3,17 @@ const router = express.Router()
 
 const {
     create,
-    getMenu
+    getMenu,
+    addItemToCart,
+    sendotp
 } = require("../controllers/Customer")
 
 // const { auth } = require("../middlewares/auth")
 
 router.post("/create", create)
-router.get("/getMenu", getMenu)
+router.post("/sendotp", sendotp)
+router.get("/getMenu/:bussinessId", getMenu)
+router.post("/addItemToCart",addItemToCart)
+
 
 module.exports = router

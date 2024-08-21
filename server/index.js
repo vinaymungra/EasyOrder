@@ -15,7 +15,6 @@ const customerRoutes = require("./routes/Customer")
 const orderRoutes = require("./routes/Order")
 const categoryRoutes = require("./routes/Category")
 
-
 const { cloudinaryConnect } = require("./config/cloudinary");
 const PORT = 4000 || process.env.PORT;
 
@@ -34,7 +33,6 @@ app.use(
 	})
 )
 
-
 database.connect();
 cloudinaryConnect();
 
@@ -45,8 +43,6 @@ app.use("/api/v1/item", itemRoutes);
 app.use("/api/v1/customer", customerRoutes);
 app.use("/api/v1/order", orderRoutes);
 app.use("/api/v1/category", categoryRoutes);
-
-
 
 app.listen(PORT, () => {
     console.log("Server is listening on port ", PORT);

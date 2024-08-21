@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const customerSchema = new mongoose.Schema({
 
-    phoneNumber: {
+    number: {
         type: String,
         required: true,
         trim: true,
