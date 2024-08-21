@@ -17,10 +17,10 @@ export const getMenu=(data) =>{
         dispatch(setLoading(true))
     
         try {
-            // console.log(data.bussinessId);
             
             const response = await apiConnector("GET", GET_MENU+`/${data.bussinessId}` );
             
+            console.log(response.data.data.category);
             result = await response.data.data.category        
         } catch (error) {
             console.log("API ERROR in getting menu for customer............", error)

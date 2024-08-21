@@ -49,7 +49,7 @@ const Cart = () => {
             handler: function (response) {
                 
                 dispatch(paymentSuccessfull(navigate,location,cartData,menuData));
-                alert("Payment Successful");
+                // alert("Payment Successful");
             },
             prefill: {
                 name: "Customer Name",

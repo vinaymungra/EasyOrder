@@ -23,18 +23,20 @@ function App() {
     const { token } = useSelector((state) => state.owner);
     const dispatch = useDispatch();
     const location = useLocation();
-    const [client, setClient] = useState(true);
-
+    
+    const isValidObjectId =false;
+    const isValidTableNumber=false;
     useEffect(() => {
         const arr = location.pathname.split("/");
-        // dispatch(checkBussinessExists(arr[1]));
-        // Set client to true if the URL structure matches expected format (e.g., valid MongoDB ObjectId and table number)
-        setClient(/^[0-9a-fA-F]{24}$/.test(arr[1]) && !isNaN(arr[2]));
+        const isValidObjectId = /^[0-9a-fA-F]{24}$/.test(arr[1]);
+        const isValidTableNumber = !isNaN(arr[2]);
+
+       
     }, [location.pathname]);
 
     return (
         <>
-            {!client && (
+            {!isValidObjectId && !isValidTableNumber && (
                 <>
                     <Navbar />
                     <Routes>
@@ -59,7 +61,7 @@ function App() {
                     </Routes>
                 </>
             )}
-            {client && (
+            {isValidObjectId && isValidTableNumber && (
                 <Routes> 
                     <Route path="/:businessId/:table" element={<Customer />} />
                     <Route path="/:businessId/:table/cart" element={<Cart />} />

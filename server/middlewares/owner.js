@@ -4,12 +4,12 @@ require("dotenv").config();
 exports.owner = async (req, res, next) => {
     try {
         // console.log(req.header("Authorization")) //whatever name you give from frontend services/operations/bussiness/createBussiness that name you have to use
-        // console.log(req.header("Authorization"))
+        console.log(req.header("Authorization"))
 
         var get1=req.header("Authorization")?.replace("token=", "")
         // var get2=req.header("Cookie")?.replace("token=", "")
         // console.log("Owner ");
-        console.log(get1);
+        // console.log(get2);
         const token = get1;
         if (!token) {
             return res.status(401).json({ success: false, message: `Token Missing` });

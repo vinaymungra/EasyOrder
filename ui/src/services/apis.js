@@ -42,8 +42,8 @@ export const customerEndpoints = {
 
 // ORDER ENDPOINTS
 export const orderEndpoints = {
-  PLACE_ORDER : BASE_URL + "/order/placeOrder"
-  
+  PLACE_ORDER : BASE_URL + "/order/placeOrder",
+  GET_ORDER : BASE_URL + "/order/getOrder" 
 }
 
 // MENU ENDPOINTS

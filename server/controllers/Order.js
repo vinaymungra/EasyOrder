@@ -16,7 +16,7 @@ exports.create = async (req, res) => {
         if (!bussinessId) {
             return res.status(400).json({
                 success: false,
-                message: "Business ID not found in the menu data"
+                message: "Bussiness ID not found in the menu data"
             });
         }
 
@@ -54,6 +54,34 @@ exports.create = async (req, res) => {
             order: order
         });
 
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            success: false,
+            message: "Failed to create order",
+            error: error.message,
+        });
+    }
+};
+
+
+exports.get = async (req, res) => {
+    try {
+        const bussiness = req.user.bussiness;
+        if(!bussiness)
+        {
+            return res.status(500).json({
+                success: false,
+                message: "Failed to fetch orders",
+                error: error.message,
+            });
+        }
+        const orders= await Order.findOne({bussiness})
+        return res.status(200).json({
+            success:true,
+            data:orders
+        })
+        
     } catch (error) {
         console.error(error);
         return res.status(500).json({

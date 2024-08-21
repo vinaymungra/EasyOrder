@@ -9,6 +9,9 @@ import { setCategoryData } from '../../../redux/slices/category';
 import { getAllCatogoryData } from '../../../services/middlewares/category';
 import { getMenu } from '../../../services/middlewares/menu';
 import { setMenuData } from '../../../redux/slices/menu';
+import { getOrders } from '../../../services/middlewares/order';
+import { setOrderData } from '../../../redux/slices/owner';
+
 
 const Sidebar = () => {
   
@@ -42,6 +45,10 @@ const Sidebar = () => {
 
           result = await dispatch(getMenu(token));
           dispatch(setMenuData(result));
+        
+          result = await dispatch(getOrders(token));
+          console.log(result)
+          dispatch(setOrderData(result));
         }
       } catch (error) {
         console.error('Error fetching data:', error);
